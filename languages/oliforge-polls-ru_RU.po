@@ -1,0 +1,196 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OliForgePolls 0.2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-30 12:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: includes/class-oliforge-polls-shortcode.php:39
+#: includes/class-oliforge-polls-util.php:28
+#: includes/class-oliforge-polls-cpt.php:28
+msgid "Vote"
+msgstr "Проголосовать"
+
+#: includes/class-oliforge-polls-shortcode.php:40
+#: includes/class-oliforge-polls-util.php:31
+msgid "Thanks! Your vote has been counted."
+msgstr "Спасибо! Ваш голос учтен."
+
+#: includes/class-oliforge-polls-shortcode.php:41
+msgid "Voting is closed."
+msgstr "Голосование закрыто."
+
+#: includes/class-oliforge-polls-shortcode.php:42
+msgid "Please choose an answer."
+msgstr "Пожалуйста, выберите ответ."
+
+#: includes/class-oliforge-polls-shortcode.php:43
+msgid "Could not save your vote. Please try again."
+msgstr "Не удалось сохранить ваш голос. Пожалуйста, попробуйте еще раз."
+
+#: includes/class-oliforge-polls-admin.php:17
+msgid "Vote Builder"
+msgstr "Конструктор голосования"
+
+#: includes/class-oliforge-polls-admin.php:83
+msgid "Add answer"
+msgstr "Добавить ответ"
+
+#: includes/class-oliforge-polls-admin.php:84
+msgid "Remove"
+msgstr "Удалить"
+
+#: includes/class-oliforge-polls-admin.php:85
+msgid "Set default labels"
+msgstr "Установить метки по умолчанию"
+
+#: includes/class-oliforge-polls-admin.php:86
+msgid "Are you sure you want to reset labels to defaults?"
+msgstr "Вы уверены, что хотите сбросить метки на значения по умолчанию?"
+
+#: includes/class-oliforge-polls-admin.php:87
+msgid "Live preview"
+msgstr "Живой предпросмотр"
+
+#: includes/class-oliforge-polls-admin.php:88
+msgid "Your question"
+msgstr "Ваш вопрос"
+
+#: includes/class-oliforge-polls-admin.php:89
+msgid "Content"
+msgstr "Содержание"
+
+#: includes/class-oliforge-polls-admin.php:90
+msgid "Answers"
+msgstr "Ответы"
+
+#: includes/class-oliforge-polls-admin.php:91
+msgid "Labels"
+msgstr "Метки"
+
+#: includes/class-oliforge-polls-admin.php:92
+msgid "Container"
+msgstr "Контейнер"
+
+#: includes/class-oliforge-polls-admin.php:93
+msgid "Question & description"
+msgstr "Вопрос и описание"
+
+#: includes/class-oliforge-polls-admin.php:94
+msgid "Answers style"
+msgstr "Стиль ответов"
+
+#: includes/class-oliforge-polls-admin.php:95
+msgid "Button & results"
+msgstr "Кнопка и результаты"
+
+#: includes/class-oliforge-polls-util.php:29
+msgid "Total votes: %d"
+msgstr "Всего голосов: %d"
+
+#: includes/class-oliforge-polls-util.php:30
+msgid "Voting ends: %s"
+msgstr "Голосование заканчивается: %s"
+
+
+#: includes/class-oliforge-polls-util.php:32
+msgid "You have already voted."
+msgstr "Вы уже проголосовали."
+
+#: includes/class-oliforge-polls-util.php:33
+msgid "Voting has ended. Final results:"
+msgstr "Голосование завершено. Окончательные результаты:"
+
+#: includes/class-oliforge-polls-cpt.php:27
+#: includes/class-oliforge-polls-cpt.php:37
+#: includes/class-oliforge-polls-cpt.php:38
+#: includes/class-oliforge-polls-cpt.php:88
+msgid "Votes"
+msgstr "Голосования"
+
+
+#: includes/class-oliforge-polls-cpt.php:29
+msgid "Add Vote"
+msgstr "Добавить голосование"
+
+#: includes/class-oliforge-polls-cpt.php:30
+msgid "Add New Vote"
+msgstr "Добавить новое голосование"
+
+#: includes/class-oliforge-polls-cpt.php:31
+msgid "Edit Vote"
+msgstr "Изменить голосование"
+
+#: includes/class-oliforge-polls-cpt.php:32
+msgid "New Vote"
+msgstr "Новое голосование"
+
+#: includes/class-oliforge-polls-cpt.php:33
+msgid "View Vote"
+msgstr "Просмотреть голосование"
+
+#: includes/class-oliforge-polls-cpt.php:34
+msgid "Search Votes"
+msgstr "Поиск голосований"
+
+#: includes/class-oliforge-polls-cpt.php:35
+msgid "No votes found"
+msgstr "Голосования не найдены"
+
+#: includes/class-oliforge-polls-cpt.php:36
+msgid "No votes found in Trash"
+msgstr "Голосования не найдены в корзине"
+
+
+#: includes/class-oliforge-polls-cpt.php:86
+msgid "Question"
+msgstr "Вопрос"
+
+#: includes/class-oliforge-polls-cpt.php:87
+msgid "Polls"
+msgstr "Опросы"
+
+
+#: includes/class-oliforge-polls-cpt.php:89
+msgid "Shortcode"
+msgstr "Шорткод"
+
+#: includes/class-oliforge-polls-cpt.php:90
+msgid "Start date"
+msgstr "Дата начала"
+
+#: includes/class-oliforge-polls-cpt.php:91
+msgid "End date"
+msgstr "Дата окончания"
+
+#: includes/class-oliforge-polls-widget.php:12
+msgid "OliForgePolls"
+msgstr "OliForgePolls"
+
+#: includes/class-oliforge-polls-widget.php:13
+msgid "Display a poll using a shortcode."
+msgstr "Отобразить опрос с использованием шорткода."
+
+#: includes/class-oliforge-polls-widget.php:58
+msgid "Title:"
+msgstr "Название:"
+
+#: includes/class-oliforge-polls-widget.php:62
+msgid "Select Poll:"
+msgstr "Выберите опрос:"
+
+#: includes/class-oliforge-polls-widget.php:64
+msgid "— Select —"
+msgstr "— Выбрать —"
+

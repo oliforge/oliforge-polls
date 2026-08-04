@@ -1,0 +1,210 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OliForgePolls 0.2.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-30 12:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: includes/class-oliforge-polls-shortcode.php:39
+msgid "Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-shortcode.php:40
+msgid "Thanks! Your vote has been counted."
+msgstr ""
+
+#: includes/class-oliforge-polls-shortcode.php:41
+msgid "Voting is closed."
+msgstr ""
+
+#: includes/class-oliforge-polls-shortcode.php:42
+msgid "Please choose an answer."
+msgstr ""
+
+#: includes/class-oliforge-polls-shortcode.php:43
+msgid "Could not save your vote. Please try again."
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:17
+msgid "Vote Builder"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:83
+msgid "Add answer"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:84
+msgid "Remove"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:85
+msgid "Set default labels"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:86
+msgid "Are you sure you want to reset labels to defaults?"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:87
+msgid "Live preview"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:88
+msgid "Your question"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:89
+msgid "Content"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:90
+msgid "Answers"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:91
+msgid "Labels"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:92
+msgid "Container"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:93
+msgid "Question & description"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:94
+msgid "Answers style"
+msgstr ""
+
+#: includes/class-oliforge-polls-admin.php:95
+msgid "Button & results"
+msgstr ""
+
+#: includes/class-oliforge-polls-util.php:28
+msgid "Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-util.php:29
+msgid "Total votes: %d"
+msgstr ""
+
+#: includes/class-oliforge-polls-util.php:30
+msgid "Voting ends: %s"
+msgstr ""
+
+#: includes/class-oliforge-polls-util.php:31
+msgid "Thanks! Your vote has been counted."
+msgstr ""
+
+#: includes/class-oliforge-polls-util.php:32
+msgid "You have already voted."
+msgstr ""
+
+#: includes/class-oliforge-polls-util.php:33
+msgid "Voting has ended. Final results:"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:27
+msgid "Votes"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:28
+msgid "Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:29
+msgid "Add Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:30
+msgid "Add New Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:31
+msgid "Edit Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:32
+msgid "New Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:33
+msgid "View Vote"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:34
+msgid "Search Votes"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:35
+msgid "No votes found"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:36
+msgid "No votes found in Trash"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:37
+msgid "All Votes"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:38
+msgid "Votes"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:86
+msgid "Question"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:87
+msgid "Polls"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:88
+msgid "Votes"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:89
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:90
+msgid "Start date"
+msgstr ""
+
+#: includes/class-oliforge-polls-cpt.php:91
+msgid "End date"
+msgstr ""
+
+#: includes/class-oliforge-polls-widget.php:12
+msgid "OliForgePolls"
+msgstr ""
+
+#: includes/class-oliforge-polls-widget.php:13
+msgid "Display a poll using a shortcode."
+msgstr ""
+
+#: includes/class-oliforge-polls-widget.php:58
+msgid "Title:"
+msgstr ""
+
+#: includes/class-oliforge-polls-widget.php:62
+msgid "Select Poll:"
+msgstr ""
+
+#: includes/class-oliforge-polls-widget.php:64
+msgid "— Select —"
+msgstr ""
+

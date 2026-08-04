@@ -1,0 +1,61 @@
+.oliforge-polls {
+  max-width: 720px;
+}
+.oliforge_polls__question {
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.oliforge_polls__description,
+.oliforge_polls__meta,
+.oliforge_polls__status,
+.oliforge_polls__results-total {
+  margin-bottom: 12px;
+}
+.oliforge_polls__answers {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.oliforge_polls__answer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+.oliforge_polls__submit-wrap {
+  margin-top: 20px;
+}
+.oliforge_polls__submit {
+  border: 0;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.oliforge_polls__notice {
+  margin-top: 12px;
+}
+.oliforge_polls__result-item + .oliforge_polls__result-item {
+  margin-top: 14px;
+}
+.oliforge_polls__result-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.oliforge_polls__progress-bg {
+  width: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.oliforge_polls__progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+.oliforge_polls__answer input[type="radio"]:focus {
+  outline: none;
+}
+.oliforge_polls__results.is-hidden {
+  display: none;
+}

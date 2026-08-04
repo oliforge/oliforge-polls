@@ -1,0 +1,136 @@
+#oliforge-polls-admin-root .alvl-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 20px;
+  padding-bottom: 1px;
+  overflow-x: auto;
+  border-bottom: 1px solid #dcdcde;
+}
+
+#oliforge-polls-admin-root .alvl-tab-button.components-button {
+  flex: 0 0 auto;
+  height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 4px 4px 0 0;
+  box-shadow: none;
+  color: #50575e;
+  font-weight: 600;
+}
+
+#oliforge-polls-admin-root .alvl-tab-button.components-button:hover,
+#oliforge-polls-admin-root .alvl-tab-button.components-button:focus {
+  color: #1d2327;
+  background: #f6f7f7;
+  box-shadow: none;
+}
+
+#oliforge-polls-admin-root .alvl-tab-button.components-button.is-active {
+  color: #2271b1;
+  border-bottom-color: #2271b1;
+  background: #f0f6fc;
+}
+
+#oliforge-polls-admin-root .alvl-tab-section {
+  display: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#oliforge-polls-admin-root .alvl-tab-section.is-active {
+  display: block;
+}
+
+#oliforge-polls-admin-root .alvl-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#oliforge-polls-admin-root .alvl-grid.alvl-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#oliforge-polls-admin-root .alvl-answer-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 100px;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+
+#oliforge-polls-admin-root .alvl-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+#oliforge-polls-preview-root .alvl-preview {
+  margin: 0;
+}
+
+#oliforge-polls-preview-root .alvl-preview > h3 {
+  display: none;
+}
+
+#oliforge-polls-preview-root .alvl-preview-results {
+  margin-top: 24px;
+}
+
+#oliforge-polls-preview-root .alvl-preview-results > h3 {
+  display: block;
+  margin: 0 0 12px;
+}
+
+#oliforge-polls-preview-root .alvl-results-card {
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+#oliforge-polls-admin-root .alvl-muted,
+#oliforge-polls-preview-root .alvl-muted {
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.oliforge-polls-shortcode-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0 16px;
+}
+
+.oliforge-polls-shortcode-box code {
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.oliforge-polls-admin-tools {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #dcdcde;
+  background: #fff;
+}
+
+.oliforge-polls-admin-tools h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 1100px) {
+  #oliforge-polls-admin-root .alvl-grid.alvl-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 782px) {
+  #oliforge-polls-admin-root .alvl-grid,
+  #oliforge-polls-admin-root .alvl-grid.alvl-grid-3,
+  #oliforge-polls-admin-root .alvl-answer-row {
+    grid-template-columns: 1fr;
+  }
+}
