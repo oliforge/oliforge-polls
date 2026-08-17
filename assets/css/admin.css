@@ -1,0 +1,378 @@
+/* OliForge brand tokens — scoped to this plugin's admin screens only
+   (list table, post edit screen, settings page all share the
+   `post-type-oliforge-polls` body class WP core adds automatically). */
+body.post-type-oliforge-polls {
+    --oli-primary:#EF7D1A;
+    --oli-primary-hover:#DA6D0F;
+    --oli-primary-active:#C25F0A;
+    --oli-primary-tint:#FDECD9;
+    --oli-primary-tint-border:#F6CFA0;
+    --oli-ink:#171923;
+    --oli-body:#3F4451;
+    --oli-muted:#6B7280;
+    --oli-border:#E5E7EB;
+    --oli-surface:#FFFFFF;
+    --oli-radius-lg:12px;
+    --oli-radius:8px;
+    --oli-radius-sm:6px;
+    --oli-shadow-card:0 1px 2px rgba(16,24,40,.04), 0 1px 3px rgba(16,24,40,.06)
+}
+
+/* Header (Settings page, and the Polls list table via admin_notices).
+   `clear:both` matters on the list table screen specifically: admin_notices
+   fires before WP core clears its floated Screen Options/Help tab links, and
+   this being a flex container (its own block formatting context) would
+   otherwise narrow itself to avoid overlapping that float instead of
+   spanning the full width like `.wrap` does elsewhere. */
+.oliforge-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    clear:both;
+    background:var(--oli-surface);
+    border:1px solid var(--oli-border);
+    border-radius:var(--oli-radius-lg);
+    box-shadow:var(--oli-shadow-card);
+    padding:18px 22px;
+    margin:20px 0 16px
+}
+
+.oliforge-header__brand {
+    display:flex;
+    align-items:center;
+    gap:12px
+}
+
+.oliforge-header__logo {
+    display:block;
+    width:64px;
+    height:64px;
+    object-fit:contain
+}
+
+.oliforge-header__brandtext {
+    display:flex;
+    flex-direction:column;
+    line-height:1.25
+}
+
+.oliforge-header__name {
+    font-size:24px;
+    font-weight:800;
+    color:var(--oli-ink);
+    letter-spacing:.2px
+}
+
+.oliforge-header__tagline {
+    font-size:12px;
+    color:var(--oli-muted)
+}
+
+.oliforge-header__title {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap
+}
+
+.oliforge-header__title h1 {
+    margin:0;
+    padding:0;
+    font-size:20px;
+    line-height:1.3;
+    font-weight:700;
+    color:var(--oli-ink)
+}
+
+.oliforge-accent {
+    color:var(--oli-primary)
+}
+
+.oliforge-lede {
+    color:var(--oli-muted);
+    margin:0 0 18px;
+    max-width:760px
+}
+
+.oliforge-badge {
+    display:inline-flex;
+    align-items:center;
+    padding:2px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    border:1px solid transparent;
+    white-space:nowrap
+}
+
+.oliforge-badge--version {
+    background:var(--oli-primary-tint);
+    color:var(--oli-primary-active);
+    border-color:var(--oli-primary-tint-border)
+}
+
+.oliforge-card {
+    background:var(--oli-surface);
+    border:1px solid var(--oli-border);
+    border-radius:var(--oli-radius-lg);
+    box-shadow:var(--oli-shadow-card);
+    padding:20px 22px;
+    margin-bottom:18px
+}
+
+/* Toggle switch — used for the "Delete data on uninstall" setting instead
+   of a plain checkbox. Selectors are scoped under the plugin's body class so
+   their specificity beats WP core's own `input[type="checkbox"]` sizing
+   rules in wp-admin/css/forms.css; without that, core's rule would win and
+   the visually-hidden input would keep its native 1rem checkbox box instead
+   of collapsing into the track. */
+body.post-type-oliforge-polls .oliforge-toggle {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    user-select:none
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__input {
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__track {
+    position:relative;
+    flex-shrink:0;
+    width:40px;
+    height:22px;
+    background:#D0D5DD;
+    border-radius:999px;
+    transition:background-color .15s ease
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__thumb {
+    position:absolute;
+    top:2px;
+    left:2px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 1px 2px rgba(16,24,40,.25);
+    transition:transform .15s ease
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__input:checked ~ .oliforge-toggle__track {
+    background:var(--oli-primary)
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__input:checked ~ .oliforge-toggle__track .oliforge-toggle__thumb {
+    transform:translateX(18px)
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__input:focus-visible ~ .oliforge-toggle__track {
+    box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--oli-primary)
+}
+
+body.post-type-oliforge-polls .oliforge-toggle__label {
+    color:var(--oli-body);
+    font-size:14px
+}
+
+/* Buttons */
+body.post-type-oliforge-polls .button-primary {
+    background:var(--oli-primary);
+    border-color:var(--oli-primary);
+    color:#fff;
+    font-weight:600;
+    border-radius:var(--oli-radius);
+    box-shadow:none;
+    text-shadow:none
+}
+
+body.post-type-oliforge-polls .button-primary:hover,
+body.post-type-oliforge-polls .button-primary:focus {
+    background:var(--oli-primary-hover);
+    border-color:var(--oli-primary-hover);
+    color:#fff
+}
+
+body.post-type-oliforge-polls .button-primary:active {
+    background:var(--oli-primary-active);
+    border-color:var(--oli-primary-active)
+}
+
+body.post-type-oliforge-polls .oliforge-polls-admin-tools .button:not(.button-link-delete) {
+    border-radius:var(--oli-radius-sm);
+    border-color:var(--oli-primary);
+    color:var(--oli-primary);
+    background:#fff
+}
+
+body.post-type-oliforge-polls .oliforge-polls-admin-tools .button:not(.button-link-delete):hover {
+    background:var(--oli-primary);
+    border-color:var(--oli-primary);
+    color:#fff
+}
+
+/* Shortcode copy button — used both in the "Shortcode" meta box and in the
+   Polls list table's Shortcode column. Replaces per-usage inline styles.
+   Scoped under the body class so this out-specifies WP core's
+   `.wp-core-ui .button` border — a bare `.oliforge-polls-copy-btn` selector
+   loses that specificity fight and core's default button border shows
+   through. */
+body.post-type-oliforge-polls .oliforge-polls-copy-btn {
+    border:none;
+    background:none;
+    box-shadow:none;
+    padding:0 4px;
+    position:relative;
+    top:-5px
+}
+
+.oliforge-polls-copy-btn img {
+    vertical-align:middle;
+    pointer-events:none
+}
+
+/* Polls list table (edit.php?post_type=oliforge-polls) — everything WP core
+   renders below the branded header (title, filters, table, pagination)
+   wrapped in one white card. Scoped to `edit-php` too, not just the shared
+   post-type body class, so this doesn't also box the settings page's own
+   `.oliforge-card` form or the single-poll edit screen. */
+body.edit-php.post-type-oliforge-polls .wrap {
+    background:var(--oli-surface);
+    border:1px solid var(--oli-border);
+    border-radius:var(--oli-radius-lg);
+    box-shadow:var(--oli-shadow-card);
+    padding:20px 22px
+}
+
+body.post-type-oliforge-polls .wp-list-table {
+    border:1px solid var(--oli-border);
+    border-radius:var(--oli-radius);
+    overflow:hidden;
+    border-spacing:0
+}
+
+body.post-type-oliforge-polls .wp-list-table thead th,
+body.post-type-oliforge-polls .wp-list-table thead td {
+    background:#FAFAFB;
+    color:var(--oli-ink)
+}
+
+body.post-type-oliforge-polls .wp-list-table tbody tr:hover {
+    background:#FAFAFB
+}
+
+/* Interactive link color (row title, row actions, sortable column headers
+   and their sort arrows, All/Published filters) — WP core defaults these to
+   admin blue; the rest of this table is already orange-branded above. */
+body.post-type-oliforge-polls .wp-list-table a,
+body.post-type-oliforge-polls .subsubsub a {
+    color:var(--oli-primary)
+}
+
+body.post-type-oliforge-polls .wp-list-table a:hover,
+body.post-type-oliforge-polls .wp-list-table a:focus,
+body.post-type-oliforge-polls .subsubsub a:hover {
+    color:var(--oli-primary-hover)
+}
+
+body.post-type-oliforge-polls .subsubsub a.current {
+    color:var(--oli-ink)
+}
+
+/* The row title itself reads as a heading, not a link — kept dark instead
+   of orange like the other row links above, with orange only as a hover
+   hint that it's clickable. */
+body.post-type-oliforge-polls .wp-list-table .row-title {
+    color:var(--oli-ink)
+}
+
+body.post-type-oliforge-polls .wp-list-table .row-title:hover,
+body.post-type-oliforge-polls .wp-list-table .row-title:focus {
+    color:var(--oli-primary)
+}
+
+body.post-type-oliforge-polls .page-title-action,
+body.post-type-oliforge-polls #doaction,
+body.post-type-oliforge-polls #doaction2,
+body.post-type-oliforge-polls #post-query-submit {
+    background:#fff;
+    border-color:var(--oli-primary);
+    color:var(--oli-primary);
+    border-radius:var(--oli-radius-sm)
+}
+
+body.post-type-oliforge-polls .page-title-action:hover,
+body.post-type-oliforge-polls .page-title-action:focus,
+body.post-type-oliforge-polls #doaction:hover,
+body.post-type-oliforge-polls #doaction2:hover,
+body.post-type-oliforge-polls #post-query-submit:hover {
+    background:var(--oli-primary);
+    border-color:var(--oli-primary);
+    color:#fff
+}
+
+body.post-type-oliforge-polls .search-box input[type="search"] {
+    border-radius:var(--oli-radius-sm);
+    border-color:var(--oli-primary);
+    padding:6px 10px
+}
+
+body.post-type-oliforge-polls .search-box input[type="search"]:focus {
+    border-color:var(--oli-primary);
+    box-shadow:0 0 0 1px var(--oli-primary)
+}
+
+body.post-type-oliforge-polls .search-box #search-submit {
+    background:#fff;
+    border-color:var(--oli-primary);
+    color:var(--oli-primary);
+    border-radius:var(--oli-radius-sm)
+}
+
+body.post-type-oliforge-polls .search-box #search-submit:hover {
+    background:var(--oli-primary);
+    border-color:var(--oli-primary);
+    color:#fff
+}
+
+body.post-type-oliforge-polls .tablenav-pages a.button {
+    background:#fff;
+    border-color:var(--oli-primary);
+    color:var(--oli-primary);
+    border-radius:var(--oli-radius-sm)
+}
+
+body.post-type-oliforge-polls .tablenav-pages a.button:hover {
+    background:var(--oli-primary);
+    border-color:var(--oli-primary);
+    color:#fff
+}
+
+body.post-type-oliforge-polls .tablenav-pages .paging-input .current-page {
+    border-radius:var(--oli-radius-sm);
+    border-color:var(--oli-primary)
+}
+
+body.post-type-oliforge-polls .tablenav-pages .total-pages {
+    color:var(--oli-ink);
+    font-weight:600
+}
+
+@media (max-width: 782px) {
+    .oliforge-header {
+        flex-direction:column;
+        align-items:flex-start
+    }
+}

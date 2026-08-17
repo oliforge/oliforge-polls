@@ -4,7 +4,7 @@ Tags: polls, voting, shortcode, gutenberg, rest-api
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 0.9.0
+Stable tag: 0.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,10 +16,10 @@ OliForge Polls lets you create a poll as a custom post type, add a question, add
 
 Main features:
 
-* Vote custom post type.
+* Poll custom post type.
 * Shortcode output: [oliforge-polls id="123"].
 * Alternative shortcode by generated short ID: [oliforge-polls id="456"] when shown in the poll list.
-* React-based poll editor in the Vote edit screen.
+* React-based poll editor in the Poll edit screen.
 * Start date and end date.
 * Result visibility modes: after vote, after end, always, hidden.
 * REST API based voting.
@@ -34,10 +34,10 @@ Main features:
 
 1. Upload the `oliforge-polls` folder to `/wp-content/plugins/`, or install the ZIP through Plugins > Add New > Upload Plugin.
 2. Activate OliForge Polls.
-3. Go to Votes > Add New.
+3. Go to Polls > Add New.
 4. Add a question, answers, dates, labels, and styles.
 5. Publish the poll.
-6. Copy the shortcode from the Votes list or use the post ID.
+6. Copy the shortcode from the Polls list or use the post ID.
 
 == Usage ==
 
@@ -45,11 +45,11 @@ Basic shortcode:
 
 `[oliforge-polls id="123"]`
 
-Where `123` is the Vote post ID or the generated shortcode ID shown in the Votes list.
+Where `123` is the Poll post ID or the generated shortcode ID shown in the Polls list.
 
 Recommended workflow:
 
-1. Create a new Vote.
+1. Create a new Poll.
 2. Enter the question.
 3. Add at least two answers.
 4. Choose when results should be visible.
@@ -66,7 +66,7 @@ Recommended workflow:
 
 == Admin Tools ==
 
-On the Vote edit screen, OliForge Polls provides:
+On the Poll edit screen, OliForge Polls provides:
 
 * Export CSV: downloads raw vote rows.
 * Recount results: rebuilds counters from vote rows.
@@ -102,6 +102,14 @@ Limitations:
 * For high-stakes polls, consider logged-in voting, CAPTCHA/Turnstile, or stricter server-side throttling.
 
 == Changelog ==
+
+= 0.10.0 =
+* Renamed the Vote custom post type and its labels to Poll (menu, list headings, add/edit/search screens) to match the shortcode, settings page, and the rest of the plugin's terminology; "Vote"/"Votes" is now reserved for the actual vote-count/tally features.
+* Renamed the "Voter Builder" meta box to "Poll Builder" to match.
+* Added the branded OliForge header (logo, tagline, version badge) above the Polls list table.
+* Wrapped the Polls list table screen (title, filters, table, pagination) in a white card matching the settings page styling.
+* Rebranded the Polls list table's interactive colors (row actions, sortable column headers and sort arrows, All/Published filters, Add New/Apply/Filter buttons) from WordPress's default blue to the OliForge orange palette; the poll title itself stays dark since it reads as a heading, not a link.
+* Fixed a specificity bug that left a stray default WordPress button border around the Shortcode column's copy icon.
 
 = 0.9.0 =
 * Renamed and rebranded the plugin from OliPoll to OliForge Polls, including the CPT slug, database table names, post meta keys, shortcode tag, Gutenberg block name, Elementor widget slug, REST namespace and widget id_base.

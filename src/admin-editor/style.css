@@ -27,9 +27,9 @@
 }
 
 #oliforge-polls-admin-root .alvl-tab-button.components-button.is-active {
-  color: #2271b1;
-  border-bottom-color: #2271b1;
-  background: #f0f6fc;
+  color: var(--oli-primary, #ef7d1a);
+  border-bottom-color: var(--oli-primary, #ef7d1a);
+  background: var(--oli-primary-tint, #fdecd9);
 }
 
 #oliforge-polls-admin-root .alvl-tab-section {
@@ -68,6 +68,25 @@
   flex-wrap: wrap;
 }
 
+/* "Add answer" / "Reset to defaults" — non-destructive actions get the
+   brand treatment. The per-row "Remove" button stays WordPress's default
+   destructive red instead of orange, matching the delete-button exclusion
+   already used for the Vote tools buttons in admin.css. */
+#oliforge-polls-admin-root .alvl-toolbar .components-button.is-secondary {
+  border: 1px solid var(--oli-primary, #ef7d1a);
+  border-radius: 6px;
+  color: var(--oli-primary, #ef7d1a);
+  background: #fff;
+  box-shadow: none;
+}
+
+#oliforge-polls-admin-root .alvl-toolbar .components-button.is-secondary:hover:not(:disabled),
+#oliforge-polls-admin-root .alvl-toolbar .components-button.is-secondary:focus:not(:disabled) {
+  background: var(--oli-primary, #ef7d1a);
+  border-color: var(--oli-primary, #ef7d1a);
+  color: #fff;
+}
+
 #oliforge-polls-preview-root .alvl-preview {
   margin: 0;
 }
@@ -87,8 +106,9 @@
 
 #oliforge-polls-preview-root .alvl-results-card {
   background: #fff;
-  border: 1px solid #dcdcde;
-  border-radius: 4px;
+  border: 1px solid var(--oli-border, #dcdcde);
+  border-radius: var(--oli-radius, 8px);
+  box-shadow: var(--oli-shadow-card, 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .06));
   padding: 20px;
 }
 
@@ -113,7 +133,9 @@
 .oliforge-polls-admin-tools {
   margin-top: 16px;
   padding: 16px;
-  border: 1px solid #dcdcde;
+  border: 1px solid var(--oli-border, #dcdcde);
+  border-radius: var(--oli-radius, 8px);
+  box-shadow: var(--oli-shadow-card, 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .06));
   background: #fff;
 }
 

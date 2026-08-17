@@ -2,8 +2,8 @@
 /**
  * Plugin Name: OliForge Polls
  * Plugin URI:  https://github.com/oliforge/oliforge-polls
- * Description: Lightweight polls plugin with Vote CPT, shortcode rendering, REST API voting, DB-backed results, hardened result visibility, CSV export, reset/recount tools, vote start/end dates, React admin editor, and Gutenberg dynamic block built with @wordpress/scripts, Elementor widget.
- * Version:           0.9.0
+ * Description: Lightweight polls plugin with Poll CPT, shortcode rendering, REST API voting, DB-backed results, hardened result visibility, CSV export, reset/recount tools, vote start/end dates, React admin editor, and Gutenberg dynamic block built with @wordpress/scripts, Elementor widget.
+ * Version:           0.10.0
  * Author:Oleksandr Lilik
  * Text Domain: oliforge-polls
  * Domain Path: /languages
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-const OLIFORGE_POLLS_VERSION = '0.9.0';
+const OLIFORGE_POLLS_VERSION = '0.10.0';
 const OLIFORGE_POLLS_FILE = __FILE__;
 define( 'OLIFORGE_POLLS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OLIFORGE_POLLS_URL', plugin_dir_url( __FILE__ ) );

@@ -1,20 +1,20 @@
 # OliForge Polls
 
-Lightweight WordPress poll plugin with a Vote CPT, shortcode rendering, REST API voting, DB-backed results, CSV export, reset/recount tools, vote dates, React admin UI, a Gutenberg dynamic block, and @wordpress/scripts-based asset workflow.
+Lightweight WordPress poll plugin with a Poll CPT, shortcode rendering, REST API voting, DB-backed results, CSV export, reset/recount tools, vote dates, React admin UI, a Gutenberg dynamic block, and @wordpress/scripts-based asset workflow.
 
 ## Installation
 
 1. Upload the plugin ZIP in **Plugins → Add New → Upload Plugin**.
 2. Activate **OliForge Polls**.
-3. Go to **Votes → Add New**.
+3. Go to **Polls → Add New**.
 4. Add a question, answers, dates, labels, and styles.
 5. Publish the poll.
-6. Copy the shortcode from the Votes list.
+6. Copy the shortcode from the Polls list.
 
 ## Usage
 
 ### Data retention / uninstall
-By default, OliForge Polls keeps polls, vote tables and counters when the plugin is deleted. To remove all plugin data during uninstall, go to **Votes → Settings** and enable **Delete data on uninstall** before deleting the plugin.
+By default, OliForge Polls keeps polls, vote tables and counters when the plugin is deleted. To remove all plugin data during uninstall, go to **Polls → Settings** and enable **Delete data on uninstall** before deleting the plugin.
 
 
 
@@ -22,7 +22,7 @@ By default, OliForge Polls keeps polls, vote tables and counters when the plugin
 [oliforge-polls id="123"]
 ```
 
-`123` can be the Vote post ID or the generated shortcode ID shown in the Votes list.
+`123` can be the Poll post ID or the generated shortcode ID shown in the Polls list.
 
 ## Result visibility modes
 
@@ -33,7 +33,7 @@ By default, OliForge Polls keeps polls, vote tables and counters when the plugin
 
 ## Admin tools
 
-On the Vote edit screen:
+On the Poll edit screen:
 
 - **Export CSV**: downloads raw vote rows.
 - **Recount results**: rebuilds counters from vote rows.
@@ -86,6 +86,14 @@ Public shortcode, block, widget and REST rendering is restricted to published po
 The vote REST endpoint includes transient-based rate limiting. Default: 10 vote attempts per poll per minute per IP/user-agent fingerprint. You can customize it with `oliforge_polls_vote_rate_limit` and `oliforge_polls_vote_rate_window` filters.
 
 ## Changelog
+### 0.10.0
+- Renamed the Vote custom post type and its labels to Poll (menu, list headings, add/edit/search screens) to match the shortcode, settings page, and the rest of the plugin's terminology; "Vote"/"Votes" is now reserved for the actual vote-count/tally features.
+- Renamed the "Voter Builder" meta box to "Poll Builder" to match.
+- Added the branded OliForge header (logo, tagline, version badge) above the Polls list table.
+- Wrapped the Polls list table screen (title, filters, table, pagination) in a white card matching the settings page styling.
+- Rebranded the Polls list table's interactive colors (row actions, sortable column headers and sort arrows, All/Published filters, Add New/Apply/Filter buttons) from WordPress's default blue to the OliForge orange palette; the poll title itself stays dark since it reads as a heading, not a link.
+- Fixed a specificity bug that left a stray default WordPress button border around the Shortcode column's copy icon.
+
 ### 0.9.0
 - Renamed and rebranded the plugin from OliPoll to OliForge Polls, including the CPT slug, database table names, post meta keys, shortcode tag, Gutenberg block name, Elementor widget slug, REST namespace and widget id_base.
 - Fixed the frontend stylesheet enqueue pointing at a non-existent file, so poll styling now loads correctly on the front end.

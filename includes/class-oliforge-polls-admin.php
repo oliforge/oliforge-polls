@@ -5,12 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class OliForge_Polls_Admin {
+    /** @var string Hook suffix of the Settings submenu page, captured from add_submenu_page(). */
+    private static $settings_hook = '';
+
     public static function init() {
         add_action( 'add_meta_boxes', array( __CLASS__, 'register_meta_box' ) );
         add_action( 'save_post_' . OliForge_Polls_CPT::POST_TYPE, array( __CLASS__, 'save_meta' ), 10, 2 );
         add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_assets' ) );
         add_action( 'admin_menu', array( __CLASS__, 'register_settings_page' ) );
         add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
+        add_action( 'admin_notices', array( __CLASS__, 'render_list_header' ) );
         add_action( 'admin_post_oliforge_polls_reset_votes', array( __CLASS__, 'handle_reset_votes' ) );
         add_action( 'admin_post_oliforge_polls_recount_votes', array( __CLASS__, 'handle_recount_votes' ) );
         add_action( 'admin_post_oliforge_polls_export_votes', array( __CLASS__, 'handle_export_votes' ) );
@@ -18,7 +22,7 @@ class OliForge_Polls_Admin {
 
 
     public static function register_settings_page() {
-        add_submenu_page(
+        self::$settings_hook = add_submenu_page(
             'edit.php?post_type=' . OliForge_Polls_CPT::POST_TYPE,
             __( 'OliForge Polls Settings', 'oliforge-polls' ),
             __( 'Settings', 'oliforge-polls' ),
@@ -64,9 +68,16 @@ class OliForge_Polls_Admin {
     public static function render_delete_data_field() {
         $value = get_option( 'oliforge_polls_delete_data_on_uninstall', 'no' );
         ?>
-        <label>
-            <input type="checkbox" name="oliforge_polls_delete_data_on_uninstall" value="yes" <?php checked( $value, 'yes' ); ?> />
-            <?php esc_html_e( 'Delete all OliForge Polls polls, vote tables, counters and plugin options when uninstalling the plugin.', 'oliforge-polls' ); ?>
+        <label class="oliforge-toggle">
+            <input
+                class="oliforge-toggle__input"
+                type="checkbox"
+                name="oliforge_polls_delete_data_on_uninstall"
+                value="yes"
+                <?php checked( $value, 'yes' ); ?>
+            />
+            <span class="oliforge-toggle__track"><span class="oliforge-toggle__thumb"></span></span>
+            <span class="oliforge-toggle__label"><?php esc_html_e( 'Delete all OliForge Polls polls, vote tables, counters and plugin options when uninstalling the plugin.', 'oliforge-polls' ); ?></span>
         </label>
         <p class="description">
             <?php esc_html_e( 'Disabled by default. Keep this unchecked if you want to preserve poll data when deleting/reinstalling the plugin.', 'oliforge-polls' ); ?>
@@ -80,12 +91,8 @@ class OliForge_Polls_Admin {
         }
         ?>
         <div class="wrap">
-            <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                <img src="<?php echo esc_url( OLIFORGE_POLLS_URL . 'src/OliForge_logo.png' ); ?>" alt="<?php esc_attr_e( 'OliForge Polls', 'oliforge-polls' ); ?>" width="64" height="64" style="vertical-align:middle;margin-right:8px;" />
-                <h1 style="color:black; font-weight: bolder"><?php esc_html_e( 'OliForge Plugins', 'oliforge-polls' ); ?></h1>
-            </div>
-            <h1><?php esc_html_e( 'OliForge Polls Settings', 'oliforge-polls' ); ?></h1>
-            <form method="post" action="options.php">
+            <?php self::render_brand_header( __( 'Polls', 'oliforge-polls' ), __( 'Settings', 'oliforge-polls' ) ); ?>
+            <form method="post" action="options.php" class="oliforge-card">
                 <?php
                 settings_fields( 'oliforge_polls_settings' );
                 do_settings_sections( 'oliforge-polls-settings' );
@@ -96,10 +103,51 @@ class OliForge_Polls_Admin {
         <?php
     }
 
+    /**
+     * Renders the shared branded header used by both this plugin's own
+     * pages and the Polls list table (via admin_notices).
+     *
+     * @param string $title_main   Main (dark) part of the page title.
+     * @param string $title_accent Accented (orange) part of the page title.
+     * @return void
+     */
+    private static function render_brand_header( string $title_main, string $title_accent ): void {
+        ?>
+        <div class="oliforge-header">
+            <div class="oliforge-header__brand">
+                <img class="oliforge-header__logo" src="<?php echo esc_url( OLIFORGE_POLLS_URL . 'src/OliForge_logo.png' ); ?>" alt="<?php esc_attr_e( 'OliForge', 'oliforge-polls' ); ?>" width="64" height="64" />
+                <div class="oliforge-header__brandtext">
+                    <span class="oliforge-header__name"><?php esc_html_e( 'OliForge', 'oliforge-polls' ); ?></span>
+                    <span class="oliforge-header__tagline"><?php esc_html_e( 'Engineering without complexity.', 'oliforge-polls' ); ?></span>
+                </div>
+            </div>
+            <div class="oliforge-header__title">
+                <h1><?php echo esc_html( $title_main ); ?> <span class="oliforge-accent"><?php echo esc_html( $title_accent ); ?></span></h1>
+                <span class="oliforge-badge oliforge-badge--version">v<?php echo esc_html( OLIFORGE_POLLS_VERSION ); ?></span>
+            </div>
+        </div>
+        <?php
+    }
+
+    /**
+     * Injects the branded header above the Polls list table screen only —
+     * admin_notices fires on every admin page, so this must self-gate by
+     * screen ID rather than running everywhere.
+     *
+     * @return void
+     */
+    public static function render_list_header(): void {
+        $screen = get_current_screen();
+        if ( ! $screen || 'edit-' . OliForge_Polls_CPT::POST_TYPE !== $screen->id ) {
+            return;
+        }
+        self::render_brand_header( __( 'Polls', 'oliforge-polls' ), __( 'List', 'oliforge-polls' ) );
+    }
+
     public static function register_meta_box() {
         add_meta_box(
             'oliforge_polls_builder',
-            __( 'Voter Builder', 'oliforge-polls' ),
+            __( 'Poll Builder', 'oliforge-polls' ),
             array( __CLASS__, 'render_builder_meta_box' ),
             OliForge_Polls_CPT::POST_TYPE,
             'normal',
@@ -140,6 +188,23 @@ class OliForge_Polls_Admin {
         self::render_tools( $post );
     }
 
+    /**
+     * Renders the "Copy shortcode" button shared by the Shortcode meta box
+     * and the Polls list table's Shortcode column, so both stay visually
+     * and behaviorally identical instead of duplicating the markup.
+     *
+     * @param string $shortcode Full shortcode text, e.g. [oliforge-polls id="..."].
+     * @return string
+     */
+    public static function render_copy_shortcode_button( $shortcode ) {
+        return sprintf(
+            '<button type="button" class="button button-small oliforge-polls-copy-btn" title="%1$s" data-oliforge-polls-copy-shortcode="%2$s"><img src="%3$s" alt="%4$s" width="16" height="16" /></button>',
+            esc_attr__( 'Copy shortcode', 'oliforge-polls' ),
+            esc_attr( $shortcode ),
+            esc_url( OLIFORGE_POLLS_URL . 'src/icon-copy.png' ),
+            esc_attr__( 'Copy', 'oliforge-polls' )
+        );
+    }
 
     private static function render_tools( $post ) {
         if ( ! $post || empty( $post->ID ) ) {
@@ -152,27 +217,21 @@ class OliForge_Polls_Admin {
         if ( ! empty( $data['shortcode_id'] ) ) {
             $shortcode = '[oliforge-polls id="' . esc_attr( $data['shortcode_id'] ) . '"]';
             echo '<div class="oliforge-polls-shortcode-box">';
-            printf(
-                '<code>%s</code> <button type="button" class="button button-small oliforge-polls-copy-btn" title="%s" data-oliforge-polls-copy-shortcode="%s" style="border:none;background:none;box-shadow:none;padding:0 4px;position:relative;top:-5px;"><img src="%s" alt="%s" width="16" height="16" style="vertical-align:middle;pointer-events:none;" /></button>',
-                esc_html( $shortcode ),
-                esc_attr__( 'Copy shortcode', 'oliforge-polls' ),
-                esc_attr( $shortcode ),
-                esc_url( OLIFORGE_POLLS_URL . 'src/icon-copy.png' ),
-                esc_attr__( 'Copy', 'oliforge-polls' )
-            );
+            echo '<code>' . esc_html( $shortcode ) . '</code> ';
+            echo self::render_copy_shortcode_button( $shortcode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside the helper.
             echo '</div>';
         }
 
-        $reset_url = wp_nonce_url( admin_url( 'admin-post.php?action=oliforge_polls_reset_votes&poll_id=' . $post_id ), 'oliforge_polls_reset_votes_' . $post_id );
+        $reset_url   = wp_nonce_url( admin_url( 'admin-post.php?action=oliforge_polls_reset_votes&poll_id=' . $post_id ), 'oliforge_polls_reset_votes_' . $post_id );
         $recount_url = wp_nonce_url( admin_url( 'admin-post.php?action=oliforge_polls_recount_votes&poll_id=' . $post_id ), 'oliforge_polls_recount_votes_' . $post_id );
-        $export_url = wp_nonce_url( admin_url( 'admin-post.php?action=oliforge_polls_export_votes&poll_id=' . $post_id ), 'oliforge_polls_export_votes_' . $post_id );
+        $export_url  = wp_nonce_url( admin_url( 'admin-post.php?action=oliforge_polls_export_votes&poll_id=' . $post_id ), 'oliforge_polls_export_votes_' . $post_id );
 
         echo '<div class="oliforge-polls-admin-tools">';
         echo '<h3>' . esc_html__( 'Vote tools', 'oliforge-polls' ) . '</h3>';
         echo '<p>' . esc_html__( 'Use these tools after saving the poll. Reset removes all vote rows and counters. Recount rebuilds counters from vote rows. Export downloads a CSV file.', 'oliforge-polls' ) . '</p>';
         echo '<a class="button" href="' . esc_url( $export_url ) . '">' . esc_html__( 'Export CSV', 'oliforge-polls' ) . '</a> ';
         echo '<a class="button" href="' . esc_url( $recount_url ) . '">' . esc_html__( 'Recount results', 'oliforge-polls' ) . '</a> ';
-        echo '<a class="button button-link-delete" onclick="return confirm(\'' . esc_js( __( 'Reset all votes for this poll?', 'oliforge-polls' ) ) . '\');" href="' . esc_url( $reset_url ) . '">' . esc_html__( 'Reset votes', 'oliforge-polls' ) . '</a>';
+        echo '<a class="button button-link-delete" data-oliforge-confirm="' . esc_attr__( 'Reset all votes for this poll?', 'oliforge-polls' ) . '" href="' . esc_url( $reset_url ) . '">' . esc_html__( 'Reset votes', 'oliforge-polls' ) . '</a>';
         echo '</div>';
     }
 
@@ -274,9 +333,41 @@ class OliForge_Polls_Admin {
         OliForge_Polls_DB::ensure_answer_rows( $post_id, $data['answers'] );
     }
 
+    /**
+     * Enqueues the hand-written brand stylesheet/script shared by all three
+     * of this plugin's PHP-rendered admin screens (Polls list, Poll edit
+     * screen, Settings page). Unlike the React "Poll Builder" bundle, these
+     * aren't part of the @wordpress/scripts build — plain files are enough.
+     *
+     * @return void
+     */
+    private static function enqueue_brand_assets() {
+        wp_enqueue_style(
+            'oliforge-polls-brand-admin',
+            OLIFORGE_POLLS_URL . 'assets/css/admin.min.css',
+            array(),
+            OLIFORGE_POLLS_VERSION
+        );
+
+        wp_enqueue_script(
+            'oliforge-polls-brand-admin',
+            OLIFORGE_POLLS_URL . 'assets/js/admin.min.js',
+            array(),
+            OLIFORGE_POLLS_VERSION,
+            true
+        );
+    }
+
     public static function enqueue_assets( $hook ) {
         global $post_type;
+
+        if ( self::$settings_hook && $hook === self::$settings_hook ) {
+            self::enqueue_brand_assets();
+            return;
+        }
+
         if ( 'edit.php' === $hook && OliForge_Polls_CPT::POST_TYPE === $post_type ) {
+            self::enqueue_brand_assets();
             $asset = OliForge_Polls_Util::get_build_asset( 'admin-list' );
             wp_enqueue_script( 'oliforge-polls-admin-list', OliForge_Polls_Util::get_build_url( 'admin-list.js' ), $asset['dependencies'], $asset['version'], true );
             return;
@@ -285,6 +376,8 @@ class OliForge_Polls_Admin {
         if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || OliForge_Polls_CPT::POST_TYPE !== $post_type ) {
             return;
         }
+
+        self::enqueue_brand_assets();
 
         $list_asset = OliForge_Polls_Util::get_build_asset( 'admin-list' );
         wp_enqueue_script( 'oliforge-polls-admin-list', OliForge_Polls_Util::get_build_url( 'admin-list.js' ), $list_asset['dependencies'], $list_asset['version'], true );

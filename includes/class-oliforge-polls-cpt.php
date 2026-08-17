@@ -24,18 +24,18 @@ class OliForge_Polls_CPT {
 
     public static function register_post_type() {
         $labels = array(
-            'name'               => __( 'Votes', 'oliforge-polls' ),
-            'singular_name'      => __( 'Vote', 'oliforge-polls' ),
-            'add_new'            => __( 'Add Vote', 'oliforge-polls' ),
-            'add_new_item'       => __( 'Add New Vote', 'oliforge-polls' ),
-            'edit_item'          => __( 'Edit Vote', 'oliforge-polls' ),
-            'new_item'           => __( 'New Vote', 'oliforge-polls' ),
-            'view_item'          => __( 'View Vote', 'oliforge-polls' ),
-            'search_items'       => __( 'Search Votes', 'oliforge-polls' ),
-            'not_found'          => __( 'No votes found', 'oliforge-polls' ),
-            'not_found_in_trash' => __( 'No votes found in Trash', 'oliforge-polls' ),
-            'all_items'          => __( 'All Votes', 'oliforge-polls' ),
-            'menu_name'          => __( 'Votes', 'oliforge-polls' ),
+            'name'               => __( 'Polls', 'oliforge-polls' ),
+            'singular_name'      => __( 'Poll', 'oliforge-polls' ),
+            'add_new'            => __( 'Add Poll', 'oliforge-polls' ),
+            'add_new_item'       => __( 'Add New Poll', 'oliforge-polls' ),
+            'edit_item'          => __( 'Edit Poll', 'oliforge-polls' ),
+            'new_item'           => __( 'New Poll', 'oliforge-polls' ),
+            'view_item'          => __( 'View Poll', 'oliforge-polls' ),
+            'search_items'       => __( 'Search Polls', 'oliforge-polls' ),
+            'not_found'          => __( 'No polls found', 'oliforge-polls' ),
+            'not_found_in_trash' => __( 'No polls found in Trash', 'oliforge-polls' ),
+            'all_items'          => __( 'All Polls', 'oliforge-polls' ),
+            'menu_name'          => __( 'Polls', 'oliforge-polls' ),
         );
 
         register_post_type(
@@ -115,7 +115,8 @@ class OliForge_Polls_CPT {
                 break;
             case 'oliforge_polls_shortcode':
                 $shortcode = '[oliforge-polls id="' . $data['shortcode_id'] . '"]';
-                printf( '<code>%s</code> <button type="button" class="button button-small oliforge-polls-copy-btn" title="%s" data-oliforge-polls-copy-shortcode="%s" style="border:none;background:none;box-shadow:none;padding:0 4px;position:relative;top:-5px;"><img src="%s" alt="%s" width="16" height="16" style="vertical-align:middle;pointer-events:none;" /></button>', esc_html( $shortcode ), esc_attr__( 'Copy shortcode', 'oliforge-polls' ), esc_attr( $shortcode ), esc_url( OLIFORGE_POLLS_URL . 'src/icon-copy.png' ), esc_attr__( 'Copy', 'oliforge-polls' ) );
+                echo '<code>' . esc_html( $shortcode ) . '</code> ';
+                echo OliForge_Polls_Admin::render_copy_shortcode_button( $shortcode ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside the helper.
                 break;
             case 'oliforge_polls_start_date':
                 echo esc_html( ! empty( $data['start_date'] ) ? $data['start_date'] : '—' );
