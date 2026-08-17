@@ -4,7 +4,7 @@ Tags: polls, voting, shortcode, gutenberg, rest-api
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 0.10.0
+Stable tag: 0.11.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,11 @@ Limitations:
 * For high-stakes polls, consider logged-in voting, CAPTCHA/Turnstile, or stricter server-side throttling.
 
 == Changelog ==
+
+= 0.11.0 =
+* Poll Builder "Add answer" / "Set default labels" buttons are now orange-branded to match the rest of the admin UI; the destructive "Remove" button stays WordPress's default red.
+* Capped the Poll Builder's width and grouped the Content and Labels tab fields into responsive grids, so single-line fields no longer stretch into long, hard-to-scan bars on wide screens.
+* Renamed the per-answer "Votes" field to "Preview votes" and made it read-only: it now shows an auto-generated random distribution while building a new poll (regenerated whenever answers are added or removed), or the poll's real, current vote count once it's an existing poll — neither is editable anymore, since it never affected the real tally.
 
 = 0.10.0 =
 * Renamed the Vote custom post type and its labels to Poll (menu, list headings, add/edit/search screens) to match the shortcode, settings page, and the rest of the plugin's terminology; "Vote"/"Votes" is now reserved for the actual vote-count/tally features.

@@ -86,6 +86,11 @@ Public shortcode, block, widget and REST rendering is restricted to published po
 The vote REST endpoint includes transient-based rate limiting. Default: 10 vote attempts per poll per minute per IP/user-agent fingerprint. You can customize it with `oliforge_polls_vote_rate_limit` and `oliforge_polls_vote_rate_window` filters.
 
 ## Changelog
+### 0.11.0
+- Poll Builder "Add answer" / "Set default labels" buttons are now orange-branded to match the rest of the admin UI; the destructive "Remove" button stays WordPress's default red.
+- Capped the Poll Builder's width and grouped the Content and Labels tab fields into responsive grids, so single-line fields no longer stretch into long, hard-to-scan bars on wide screens.
+- Renamed the per-answer "Votes" field to "Preview votes" and made it read-only: it now shows an auto-generated random distribution while building a new poll (regenerated whenever answers are added or removed), or the poll's real, current vote count once it's an existing poll — neither is editable anymore, since it never affected the real tally.
+
 ### 0.10.0
 - Renamed the Vote custom post type and its labels to Poll (menu, list headings, add/edit/search screens) to match the shortcode, settings page, and the rest of the plugin's terminology; "Vote"/"Votes" is now reserved for the actual vote-count/tally features.
 - Renamed the "Voter Builder" meta box to "Poll Builder" to match.

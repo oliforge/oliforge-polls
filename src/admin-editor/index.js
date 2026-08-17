@@ -29,13 +29,30 @@ import './style.css';
     return isNaN(n) ? fallback : n;
   }
 
+  // Preview-only vote counts for a poll that hasn't been created yet — a
+  // plausible-looking random spread, not real data. Regenerated whenever
+  // the number of answers changes so the combination always matches.
+  function randomPreviewVotes() {
+    return Math.floor(Math.random() * 38) + 3;
+  }
+
+  function withRandomPreviewVotes(answers) {
+    return answers.map(function (answer) {
+      return Object.assign({}, answer, { votes: randomPreviewVotes() });
+    });
+  }
+
   function App() {
+    var isNewPoll = !!(config && config.isNewPoll);
     var initial = config && config.data ? config.data : {};
     var defaults = config && config.defaults ? config.defaults : {};
     var i18n = config && config.labels ? config.labels : {};
     var initialStyles = Object.assign({}, defaults.styles || {}, initial.styles || {});
     var initialLabels = Object.assign({}, defaults.labels || {}, initial.labels || {});
     var initialData = Object.assign({}, defaults, initial, { styles: initialStyles, labels: initialLabels });
+    if (isNewPoll && Array.isArray(initialData.answers)) {
+      initialData.answers = withRandomPreviewVotes(initialData.answers);
+    }
     var _a = useState(initialData), data = _a[0], setData = _a[1];
     var _tab = useState('content'), activeTab = _tab[0], setActiveTab = _tab[1];
 
@@ -70,8 +87,9 @@ import './style.css';
     }
 
     function addAnswer() {
+      var answers = (data.answers || []).concat([{ id: uid(), text: '', votes: 0 }]);
       setData(Object.assign({}, data, {
-        answers: (data.answers || []).concat([{ id: uid(), text: '', votes: 0 }])
+        answers: isNewPoll ? withRandomPreviewVotes(answers) : answers
       }));
     }
 
@@ -79,7 +97,9 @@ import './style.css';
       var answers = (data.answers || []).slice();
       if (answers.length <= 2) return;
       answers.splice(index, 1);
-      setData(Object.assign({}, data, { answers: answers }));
+      setData(Object.assign({}, data, {
+        answers: isNewPoll ? withRandomPreviewVotes(answers) : answers
+      }));
     }
 
     var preview = {
@@ -141,35 +161,37 @@ import './style.css';
           value: data.description || '',
           onChange: function (value) { return update('description', value); }
         }),
-        el(SelectControl, {
-          label: 'Results visibility',
-          value: data.results_visibility || 'after_vote',
-          options: [
-            { label: 'After voting', value: 'after_vote' },
-            { label: 'Only after end date', value: 'after_end' },
-            { label: 'Always show', value: 'always' },
-            { label: 'Hidden', value: 'hidden' }
-          ],
-          onChange: function (value) {
-            update('results_visibility', value);
-            update('show_results_after_vote', value === 'after_vote');
-          },
-          help: 'Controls when percentages and vote counts are visible on the frontend.'
-        }),
-        el(TextControl, {
-          label: 'Voting start date',
-          type: 'datetime-local',
-          value: data.start_date || '',
-          onChange: function (value) { return update('start_date', value); },
-          help: 'Before this date, voting is not yet open.'
-        }),
-        el(TextControl, {
-          label: 'Voting end date',
-          type: 'datetime-local',
-          value: data.end_date || '',
-          onChange: function (value) { return update('end_date', value); },
-          help: 'After this date, voting is closed and final results are shown.'
-        })
+        el('div', { className: 'alvl-grid alvl-grid-3' },
+          el(SelectControl, {
+            label: 'Results visibility',
+            value: data.results_visibility || 'after_vote',
+            options: [
+              { label: 'After voting', value: 'after_vote' },
+              { label: 'Only after end date', value: 'after_end' },
+              { label: 'Always show', value: 'always' },
+              { label: 'Hidden', value: 'hidden' }
+            ],
+            onChange: function (value) {
+              update('results_visibility', value);
+              update('show_results_after_vote', value === 'after_vote');
+            },
+            help: 'Controls when percentages and vote counts are visible on the frontend.'
+          }),
+          el(TextControl, {
+            label: 'Voting start date',
+            type: 'datetime-local',
+            value: data.start_date || '',
+            onChange: function (value) { return update('start_date', value); },
+            help: 'Before this date, voting is not yet open.'
+          }),
+          el(TextControl, {
+            label: 'Voting end date',
+            type: 'datetime-local',
+            value: data.end_date || '',
+            onChange: function (value) { return update('end_date', value); },
+            help: 'After this date, voting is closed and final results are shown.'
+          })
+        )
       ),
       el('div', { className: 'alvl-tab-section' + (activeTab === 'answers' ? ' is-active' : ''), role: 'tabpanel', 'aria-label': i18n.answers },
         (data.answers || []).map(function (answer, index) {
@@ -180,9 +202,10 @@ import './style.css';
               onChange: function (value) { return updateAnswer(index, 'text', value); }
             }),
             el(__experimentalNumberControl, {
-              label: 'Votes',
+              label: isNewPoll ? 'Preview votes' : 'Votes',
               value: answer.votes,
-              onChange: function (value) { return updateAnswer(index, 'votes', number(value, 0)); }
+              disabled: true,
+              onChange: function () {}
             }),
             el(Button, {
               isDestructive: true,
@@ -196,49 +219,51 @@ import './style.css';
         )
       ),
       el('div', { className: 'alvl-tab-section' + (activeTab === 'labels' ? ' is-active' : ''), role: 'tabpanel', 'aria-label': i18n.labels },
-        el(TextControl, {
-          label: 'Vote button text',
-          value: data.labels.voteButton,
-          onChange: function (value) { return update('labels.voteButton', value); }
-        }),
-        el(TextControl, {
-          label: 'Total votes text',
-          value: data.labels.totalVotes,
-          onChange: function (value) { return update('labels.totalVotes', value); },
-          help: 'Use %d for the number of votes.'
-        }),
-        el(TextControl, {
-          label: 'Voting starts text',
-          value: data.labels.votingStarts,
-          onChange: function (value) { return update('labels.votingStarts', value); },
-          help: 'Use %s for the date.'
-        }),
-        el(TextControl, {
-          label: 'Voting ends text',
-          value: data.labels.votingEnds,
-          onChange: function (value) { return update('labels.votingEnds', value); },
-          help: 'Use %s for the date.'
-        }),
-        el(TextControl, {
-          label: 'Voted success message',
-          value: data.labels.votedMessage,
-          onChange: function (value) { return update('labels.votedMessage', value); }
-        }),
-        el(TextControl, {
-          label: 'Already voted message',
-          value: data.labels.alreadyVoted,
-          onChange: function (value) { return update('labels.alreadyVoted', value); }
-        }),
-        el(TextControl, {
-          label: 'Voting closed message',
-          value: data.labels.closedMessage,
-          onChange: function (value) { return update('labels.closedMessage', value); }
-        }),
-        el(TextControl, {
-          label: 'Voting not started message',
-          value: data.labels.notStartedMessage,
-          onChange: function (value) { return update('labels.notStartedMessage', value); }
-        }),
+        el('div', { className: 'alvl-grid' },
+          el(TextControl, {
+            label: 'Vote button text',
+            value: data.labels.voteButton,
+            onChange: function (value) { return update('labels.voteButton', value); }
+          }),
+          el(TextControl, {
+            label: 'Total votes text',
+            value: data.labels.totalVotes,
+            onChange: function (value) { return update('labels.totalVotes', value); },
+            help: 'Use %d for the number of votes.'
+          }),
+          el(TextControl, {
+            label: 'Voting starts text',
+            value: data.labels.votingStarts,
+            onChange: function (value) { return update('labels.votingStarts', value); },
+            help: 'Use %s for the date.'
+          }),
+          el(TextControl, {
+            label: 'Voting ends text',
+            value: data.labels.votingEnds,
+            onChange: function (value) { return update('labels.votingEnds', value); },
+            help: 'Use %s for the date.'
+          }),
+          el(TextControl, {
+            label: 'Voted success message',
+            value: data.labels.votedMessage,
+            onChange: function (value) { return update('labels.votedMessage', value); }
+          }),
+          el(TextControl, {
+            label: 'Already voted message',
+            value: data.labels.alreadyVoted,
+            onChange: function (value) { return update('labels.alreadyVoted', value); }
+          }),
+          el(TextControl, {
+            label: 'Voting closed message',
+            value: data.labels.closedMessage,
+            onChange: function (value) { return update('labels.closedMessage', value); }
+          }),
+          el(TextControl, {
+            label: 'Voting not started message',
+            value: data.labels.notStartedMessage,
+            onChange: function (value) { return update('labels.notStartedMessage', value); }
+          })
+        ),
         el('div', { className: 'alvl-toolbar' },
           el(Button, {
             variant: 'secondary',

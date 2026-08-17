@@ -399,14 +399,22 @@ class OliForge_Polls_Admin {
             true
         );
 
-        $post_id = get_the_ID();
+        $post_id     = get_the_ID();
+        $is_new_poll = ! $post_id || 'auto-draft' === get_post_status( $post_id );
+        $data        = OliForge_Polls_Util::get_poll_data( $post_id );
+        if ( ! $is_new_poll ) {
+            // Existing poll: show real, current vote counts (read-only in
+            // the UI) instead of whatever was last saved in post meta.
+            $data = OliForge_Polls_Util::apply_db_counts_to_data( $post_id, $data );
+        }
         wp_localize_script(
             'oliforge-polls-admin',
             'OliForgePollsAdmin',
             array(
-                'data'     => OliForge_Polls_Util::get_poll_data( $post_id ),
-                'defaults' => OliForge_Polls_Util::default_settings(),
-                'labels'   => array(
+                'data'       => $data,
+                'isNewPoll'  => $is_new_poll,
+                'defaults'   => OliForge_Polls_Util::default_settings(),
+                'labels'     => array(
                     'addAnswer' => __( 'Add answer', 'oliforge-polls' ),
                     'remove'    => __( 'Remove', 'oliforge-polls' ),
                     'setDefaults' => __( 'Set default labels', 'oliforge-polls' ),

@@ -1,3 +1,11 @@
+/* Caps how wide the form controls can stretch on wide screens — without
+   this, a single-column field (or the 1fr answer-text column) fills the
+   entire postbox width and turns into a long, hard-to-scan bar instead of
+   a normal-looking text field. */
+#oliforge-polls-admin-root {
+  max-width: 960px;
+}
+
 #oliforge-polls-admin-root .alvl-tabs {
   display: flex;
   gap: 6px;
