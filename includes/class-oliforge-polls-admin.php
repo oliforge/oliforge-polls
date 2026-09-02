@@ -92,6 +92,17 @@ class OliForge_Polls_Admin {
         ?>
         <div class="wrap">
             <?php self::render_brand_header( __( 'Polls', 'oliforge-polls' ), __( 'Settings', 'oliforge-polls' ) ); ?>
+            <?php
+            /*
+             * Marks where the branded header ends, so WP core's admin-notice relocation
+             * (wp-admin/js/common.js) inserts notices here instead of after the <h1> it
+             * finds inside the header card, which would visually place them inside it.
+             * Not added to render_brand_header() itself: the Polls list screen already
+             * gets a native wp-header-end from edit.php further down, and a second one
+             * here would make core's relocation script insert the notice twice.
+             */
+            ?>
+            <hr class="wp-header-end">
             <form method="post" action="options.php" class="oliforge-card">
                 <?php
                 settings_fields( 'oliforge_polls_settings' );
