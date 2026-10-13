@@ -86,6 +86,9 @@ Public shortcode, block, widget and REST rendering is restricted to published po
 The vote REST endpoint includes transient-based rate limiting. Default: 10 vote attempts per poll per minute per IP/user-agent fingerprint. You can customize it with `oliforge_polls_vote_rate_limit` and `oliforge_polls_vote_rate_window` filters.
 
 ## Changelog
+### 0.11.2
+- Aligned the plugin header's "Tested up to" value with readme.txt (7.1).
+
 ### 0.11.1
 - Added the Plugin URI header linking to the plugin page on oliforge.io.
 

@@ -4,7 +4,7 @@ Tags: polls, voting, shortcode, gutenberg, rest-api
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.11.1
+Stable tag: 0.11.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,9 @@ Limitations:
 * For high-stakes polls, consider logged-in voting, CAPTCHA/Turnstile, or stricter server-side throttling.
 
 == Changelog ==
+
+= 0.11.2 =
+* Aligned the plugin header's "Tested up to" value with readme.txt (7.1).
 
 = 0.11.1 =
 * Added the Plugin URI header linking to the plugin page on oliforge.io.
