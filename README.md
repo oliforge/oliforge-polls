@@ -86,6 +86,9 @@ Public shortcode, block, widget and REST rendering is restricted to published po
 The vote REST endpoint includes transient-based rate limiting. Default: 10 vote attempts per poll per minute per IP/user-agent fingerprint. You can customize it with `oliforge_polls_vote_rate_limit` and `oliforge_polls_vote_rate_window` filters.
 
 ## Changelog
+### 0.11.1
+- Added the Plugin URI header linking to the plugin page on oliforge.io.
+
 ### 0.11.0
 - Poll Builder "Add answer" / "Set default labels" buttons are now orange-branded to match the rest of the admin UI; the destructive "Remove" button stays WordPress's default red.
 - Capped the Poll Builder's width and grouped the Content and Labels tab fields into responsive grids, so single-line fields no longer stretch into long, hard-to-scan bars on wide screens.
